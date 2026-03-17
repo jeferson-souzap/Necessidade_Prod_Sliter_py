@@ -26,6 +26,7 @@ rev006 — Novidade:
     com mensagem clara antes de tentar qualquer leitura.
 """
 
+from datetime import datetime
 import pandas as pd
 import os
 import platform
@@ -44,8 +45,8 @@ USUARIO = get_current_user()
 print(f"Usuário: {USUARIO} | SO: {SO}")
 
 if SO == 'Windows':
-    BASE_INPUT  = r'C:\Users\jefersson.souza\OneDrive - Açotel Indústria e Comércio LTDA\Dev\Necessidade_Slitter_py\Files\input'
-    BASE_OUTPUT = r'C:\Users\jefersson.souza\OneDrive - Açotel Indústria e Comércio LTDA\Dev\Necessidade_Slitter_py\Files\output'
+    BASE_INPUT  = r'D:\#Mega\Jeferson - Dev\02 - Linguagens\Python\Acotel\Necessidade_Prod_Sliter_py\Files\input'
+    BASE_OUTPUT = r'D:\#Mega\Jeferson - Dev\02 - Linguagens\Python\Acotel\Necessidade_Prod_Sliter_py\Files\output'
 else:
     BASE_INPUT  = r'/home/stark/Documentos/Dev/Necessidade_Slitter_py/Files/input/'
     BASE_OUTPUT = r'/home/stark/Documentos/Dev/Necessidade_Slitter_py/Files/output'
@@ -279,7 +280,11 @@ df_necessidade = df_necessidade[[
 # =============================================================================
 
 os.makedirs(BASE_OUTPUT, exist_ok=True)
-caminho_saida = os.path.join(BASE_OUTPUT, 'Necessidade - Slitter - rev005.xlsx')
+
+
+timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+
+caminho_saida = os.path.join(BASE_OUTPUT, f'Necessidade_Slitter {timestamp}.xlsx')
 df_necessidade.to_excel(caminho_saida, index=False)
 
 print(f"\nExportado: {caminho_saida}")
